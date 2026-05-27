@@ -1,0 +1,18 @@
+{
+    "entryFile": "src/index.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": [
+        "src/controllers/**/*.ts"
+    ],
+    "spec": {
+        "outputDirectory": "./.docs",
+        "specVersion": 3,
+        "info": {
+            "title": "Minha API Express + TypeScript",
+            "description": "Documentação gerada automaticamente via TSOA."
+        }
+    },
+    "routes": {
+        "routesDir": "./src/routes"
+    }
+}

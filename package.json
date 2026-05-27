@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "swagger": "node swagger.js",
-    "dev": "npm run swagger && ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "npm run swagger && tsc",
+    "tsoa": "tsoa spec-and-routes",
+    "dev": "npm run tsoa && ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "npm run tsoa && tsc",
     "start": "node dist/index.js"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^6.0.1",
     "swagger-ui-express": "^5.0.1",
+    "tsoa": "^7.0.0-alpha.0",
     "typeorm": "^1.0.0"
   },
   "devDependencies": {
