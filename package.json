@@ -1,19 +1,21 @@
 {
   "name": "trabalho",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "swagger": "node swagger.js",
-    "dev": "npm run swagger && ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "npm run swagger && tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
     "start": "node dist/index.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "class-validator-jsonschema": "^5.1.0",
     "express": "^4.19.2",
     "reflect-metadata": "^0.2.2",
+    "routing-controllers": "^0.11.3",
+    "routing-controllers-openapi": "^5.0.1",
     "sqlite3": "^6.0.1",
     "swagger-ui-express": "^5.0.1",
     "typeorm": "^1.0.0"
