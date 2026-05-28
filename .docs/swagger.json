@@ -62,6 +62,137 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"WorkoutResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"athleteId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"athleteId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"WorkoutCreate": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"athleteId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"athleteId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"WorkoutIARequest": {
+				"properties": {
+					"athleteId": {
+						"type": "number",
+						"format": "double"
+					},
+					"workoutFocus": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"athleteId",
+					"workoutFocus"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AthleteResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"age": {
+						"type": "number",
+						"format": "double"
+					},
+					"weight": {
+						"type": "number",
+						"format": "double"
+					},
+					"height": {
+						"type": "number",
+						"format": "double"
+					},
+					"goal": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"age",
+					"weight",
+					"height",
+					"goal"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AthleteCreate": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"age": {
+						"type": "number",
+						"format": "double"
+					},
+					"weight": {
+						"type": "number",
+						"format": "double"
+					},
+					"height": {
+						"type": "number",
+						"format": "double"
+					},
+					"goal": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"age",
+					"weight",
+					"height",
+					"goal"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -114,6 +245,246 @@
 						}
 					}
 				}
+			}
+		},
+		"/workouts": {
+			"get": {
+				"operationId": "ListWorkouts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/WorkoutResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Workouts"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "skip",
+						"required": false,
+						"schema": {
+							"default": 0,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 100,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateWorkout",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/WorkoutResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Athlete Not Found"
+					}
+				},
+				"tags": [
+					"Workouts"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/WorkoutCreate"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/workouts/generate-with-ai": {
+			"post": {
+				"operationId": "CreateWorkoutWithAI",
+				"responses": {
+					"201": {
+						"description": "Created with AI",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/WorkoutResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Athlete Not Found"
+					}
+				},
+				"tags": [
+					"Workouts"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-ai-provider",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/WorkoutIARequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/athletes": {
+			"get": {
+				"operationId": "ListAthletes",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/AthleteResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Athletes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "skip",
+						"required": false,
+						"schema": {
+							"default": 0,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 100,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateAthlete",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AthleteResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Athletes"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AthleteCreate"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/athletes/{athleteId}/workouts": {
+			"get": {
+				"operationId": "ListAthleteWorkouts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/WorkoutResponse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"tags": [
+					"Athletes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "athleteId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		}
 	},

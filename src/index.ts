@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import routes from './routes/routes';
 import { RegisterRoutes } from './routes/routes'; // Este arquivo será gerado automaticamente pelo TSOA
 import swaggerDocument from '../.docs/swagger.json'; // Este JSON também será gerado automaticamente
 
