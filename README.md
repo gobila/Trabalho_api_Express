@@ -90,3 +90,4 @@ A API expõe três grandes grupos de endpoints funcionais:
 ##  TODOs
 
 - [ ] Remover template de api de multas
+
